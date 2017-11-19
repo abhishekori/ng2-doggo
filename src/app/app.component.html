@@ -1,5 +1,5 @@
 <!-- Image and text -->
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="#">
     <img src="/assets/dog.svg" width="30" height="30" class="d-inline-block align-top" alt="">
      Doggo
@@ -7,13 +7,15 @@
 </nav>
 
 <div class="container">
-
-  <div class="card" style="width: 20rem;">
-  <img class="card-img-top img-fluid" height="50" src="https://placeimg.com/100/100/animals" alt="Card image cap">
+<br><br><br>
+  <div class="card div-center" style="width: 20rem;">
+  <img class="card-img-top img-fluid" height="50" [src]='this.dogPicUrl' alt="Card image cap">
   <div class="card-body">
-    <h4 class="card-title">Card title</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h4 class="card-title">{{dogBreed}}</h4>
+
+  <button href="#" class="btn btn-lg btn-block btn-success" (click)="this.loadRandomDogPic()"><img src="/assets/pawprints.svg" width="50" height="50" alt=""></button>
+
+
   </div>
 </div>
 

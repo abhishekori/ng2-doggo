@@ -1,4 +1,4 @@
-export interface IdoggoPic{
+export interface IDogRandomPic{
   status:string;
   message:string;
 }
