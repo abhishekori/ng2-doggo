@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 const appRoutes:Routes=[
   {path:'',component:HomeComponent},
+  {path:'ng2-doggo',component:HomeComponent}
   {path:'home',component:HomeComponent},
   {path:'search',component:SearchComponent}
 ];
