@@ -1,53 +1,35 @@
 import { Component } from '@angular/core';
-import {IDogRandomPic} from './dog-random-pic';
-import {DogService} from './dog.service';
-import {Http,Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
+import 'rxjs/add/operator/pairwise';
+import { Router } from '@angular/router';
+import {NavigationStart} from '@angular/router';
+import {ViewChild} from '@angular/core';
 @Component({
-  selector: 'app-root',
+  selector: 'app-main',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[DogService]
+  providers:[]
 })
 export class AppComponent {
-  idoggoPic:IDogRandomPic[];
-  dogPicUrl:string='../assets/dog.svg';
-  dogBreed:string='loading...'
+homeTabActiveClass:boolean;
+profleTabActiveClass:boolean;
+  constructor(private router: Router) {
+    this.homeTabActiveClass=true;
+    this.profleTabActiveClass=false;
+        this.router.events.subscribe((event) => {
+          if(event instanceof NavigationStart){
+            console.log(event.url);
+            if(event.url=="/home"){
+              this.homeTabActiveClass=true;
+              this.profleTabActiveClass=false;
+            }
 
-  constructor(private _dogService:DogService){}
-  title = 'app';
+            if(event.url=="/search"){
+              this.homeTabActiveClass=false;
+              this.profleTabActiveClass=true;
+            }
+          }
 
-  loadRandomDogPic():void{
-    this._dogService.getRandomDogPic()
-    .subscribe(idoggoPic=>{this.setPicAndBreed(idoggoPic)});
-    // this._dogService.getAllBreeds()
-    // .subscribe(idoggoAllBreed=>{console.log(idoggoAllBreed)})
-  }
-
-
-  ngOnInit():void{
-    this.loadRandomDogPic();
-
-  }
-
-   setPicAndBreed(idoggo):void{
-    this.dogPicUrl=idoggo.message
-    this.dogBreed=this.getDogBreedFromUrl(this.dogPicUrl);
-  }
-
-
-  getDogBreedFromUrl(url:string){
-    console.log(url.split("/")[5])
-    var dogBreed=url.split("/")[5];
-    var dogBreedArray = dogBreed.split("-")
-    if(dogBreedArray[1])
-    {
-      dogBreed = dogBreedArray[1]+" "+dogBreedArray[0];
-    }
-    console.log(dogBreed)
-    return dogBreed;
-  }
+        });
+    };
 
 }

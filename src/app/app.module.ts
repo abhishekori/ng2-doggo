@@ -4,16 +4,28 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
 
+import { SearchComponent } from './search/search.component';
+import {RouterModule,Routes} from  '@angular/router';
+import { HomeComponent } from './home/home.component';
+
+const appRoutes:Routes=[
+  {path:'',component:HomeComponent},
+  {path:'home',component:HomeComponent},
+  {path:'search',component:SearchComponent}
+];
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
